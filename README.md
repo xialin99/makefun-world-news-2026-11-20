@@ -1,4 +1,4 @@
-# World News · 20 November 2026
+# 一图看世界 / World News · 20 November 2026
 
 [中文](#中文) · [English](#english)
 
