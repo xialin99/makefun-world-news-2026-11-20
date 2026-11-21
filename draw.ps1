@@ -1,3 +1,30 @@
+param(
+    [ValidateSet('zh', 'en')][string]$Language = 'zh',
+    [string]$Output
+)
+
+$ErrorActionPreference = 'Stop'
+if (!$Output) { $Output = Join-Path $PSScriptRoot $(if ($Language -eq 'zh') { 'entry.zh.png' } else { 'entry.png' }) }
+$Chinese = @{
+    'WORLD IN ONE FRAME' = '一图看世界'
+    'FRI  /  20 NOV 2026' = '周五 / 2026年11月20日'
+    'Across the divide' = '隔岸之间'
+    'UKRAINE' = '乌克兰'
+    'Russia strikes overnight' = '俄罗斯发动夜间袭击'
+    'Missiles and drones hit Kyiv bridges and the power grid.' = '导弹和无人机击中基辅的桥梁及电网。'
+    'At least 8 killed, officials say' = '官员称至少 8 人死亡'
+    'BRUSSELS' = '布鲁塞尔'
+    'UK and EU reset ties' = '英国与欧盟重整关系'
+    'Summit tackles food trade' = '峰会讨论食品贸易'
+    'and youth mobility.' = '以及青年流动议题。'
+    'MYANMAR / ROHINGYA' = '缅甸 / 罗兴亚人'
+    'Groups urge sanctions' = '团体呼吁制裁'
+    'After the UN court''s' = '联合国法院于 11 月 19 日'
+    '19 Nov genocide ruling.' = '就种族灭绝案作出裁决。'
+    'EDITORIAL ILLUSTRATION' = '新闻插画'
+    'REPORTING  /  AP + REUTERS' = '消息来源 / 美联社与路透社'
+}
+
 Add-Type -AssemblyName System.Drawing
 $canvas = [Drawing.Bitmap]::new(1000,1000)
 $g = [Drawing.Graphics]::FromImage($canvas)
@@ -28,9 +55,17 @@ function Poly($coords,$hex) {
     $b.Dispose()
 }
 function Draw-Text($s,$x,$y,$size,$hex,$face='Arial',$style='Bold') {
+    if ($Language -eq 'zh') { $s = $Chinese[$s]; $face = 'Microsoft YaHei UI' }
     $f = [Drawing.Font]::new($face,$size,[Drawing.FontStyle]$style,[Drawing.GraphicsUnit]::Pixel)
     $b = [Drawing.SolidBrush]::new((C $hex))
-    $g.DrawString($s,$f,$b,[single]$x,[single]$y,[Drawing.StringFormat]::GenericTypographic)
+    $format = [Drawing.StringFormat]::GenericTypographic
+    while ($Language -eq 'zh' -and $size -gt 12 -and $g.MeasureString($s,$f,2048,$format).Width -gt (974 - $x)) {
+        $f.Dispose()
+        $size--
+        $f = [Drawing.Font]::new($face,$size,[Drawing.FontStyle]$style,[Drawing.GraphicsUnit]::Pixel)
+    }
+    $g.DrawString($s,$f,$b,[single]$x,[single]$y,$format)
+    $format.Dispose()
     $b.Dispose()
     $f.Dispose()
 }
@@ -111,7 +146,7 @@ foreach ($x in @(690,802)) {
 Line 45 948 955 948 $ink
 Draw-Text 'EDITORIAL ILLUSTRATION' 45 963 18 $ink
 Draw-Text 'REPORTING  /  AP + REUTERS' 681 963 18 $ink
-$canvas.Save((Join-Path (Get-Location) 'entry.png'),[Drawing.Imaging.ImageFormat]::Png)
+$canvas.Save($Output,[Drawing.Imaging.ImageFormat]::Png)
 $g.Dispose()
 $canvas.Dispose()
 

@@ -2,7 +2,9 @@
 
 [中文](#中文) · [English](#english)
 
-![Preview](entry.png)
+![中文版新闻图](entry.zh.png)
+
+[中文版 / Chinese](entry.zh.png) · [English edition / 英文版](entry.png)
 
 ## 中文
 
@@ -10,7 +12,7 @@
 
 ### 本地运行
 
-直接查看 `entry.png`。在 Windows 上用 PowerShell 执行 `./draw.ps1` 可重新渲染。
+直接打开 [中文版](entry.zh.png) 或 [英文版](entry.png)。在 Windows PowerShell 7 中运行 `./draw.ps1` 生成中文版，添加 `-Language en` 生成英文版。
 
 ## English
 
@@ -18,7 +20,7 @@ A one-image editorial summary of world news for 20 November 2026, with its rende
 
 ### Run locally
 
-Open `entry.png` directly. Run `./draw.ps1` with PowerShell on Windows to render the artwork again.
+Open the [Chinese edition](entry.zh.png) or the [English edition](entry.png). Run `./draw.ps1` in PowerShell 7 on Windows. Add `-Language en` to render the English edition.
 
 [make.fun 赛事 / Original bounty](https://make.fun/bounty/news-image-20261120)
 
