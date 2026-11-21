@@ -8,6 +8,11 @@
 
 ## 中文
 
+### 第一次使用
+
+1. 想做其他日期或今天的新闻图，请[打开每日新闻制图](https://xialin99.github.io/makefun-news-studio/)。选择日期，勾选新闻，再点 **下载 PNG**。
+2. 想看这份参赛原稿，直接打开 [中文版](entry.zh.png) 或 [英文版](entry.png)。
+
 2026 年 11 月 20 日世界新闻的单图排版，附生成脚本和最终 PNG。
 
 ### 本地运行
@@ -15,6 +20,11 @@
 直接打开 [中文版](entry.zh.png) 或 [英文版](entry.png)。在 Windows PowerShell 7 中运行 `./draw.ps1` 生成中文版，添加 `-Language en` 生成英文版。
 
 ## English
+
+### First use
+
+1. To create a poster for today or another date, [open Daily News Studio](https://xialin99.github.io/makefun-news-studio/), pick a date, choose stories, and download the PNG.
+2. To view this archived competition entry, open the [Chinese image](entry.zh.png) or the [English image](entry.png).
 
 A one-image editorial summary of world news for 20 November 2026, with its renderer and resulting PNG.
 
